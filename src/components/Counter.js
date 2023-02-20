@@ -6,7 +6,6 @@ import classes from "./Counter.module.css";
 const Calculator = () => {
   const result = useSelector((state) => state.calculate.result);
   // console.log(result);
- 
 
   const dispatch = useDispatch();
 
