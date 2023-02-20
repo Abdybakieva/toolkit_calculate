@@ -1,35 +1,30 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { authActionsTypes } from '../store/auth/authReducer';
-import classes from './Auth.module.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authActions, authActionsTypes } from "../store/auth/authReducer";
+import classes from "./Auth.module.css";
 
+export const Auth = () => {
+  const dispatch = useDispatch();
 
-export const Auth =()=>{
-  const dispatch=useDispatch()
+  const [formState, setState] = useState({
+    email: "",
+    password: "",
+  });
 
-
-const [formState,setState]=useState({
-  email:"",
-  password:""
-})
-
-const inputChangeHandler=(name)=>{
-  return(event)=>{
-
-    setState(prevState=>({...prevState, [name]:event.target.value}))
-  }
-}
-const submitHandler=(event)=>{
-   event.preventDefault();
-  if(formState.email === "test@gmail.com" && formState.password==="123123"){
-    dispatch({
-      type:authActionsTypes.LOG_IN,
-      payload:formState.email
-    })
-  }
-}
-
-
+  const inputChangeHandler = (name) => {
+    return (event) => {
+      setState((prevState) => ({ ...prevState, [name]: event.target.value }));
+    };
+  };
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (
+      formState.email === "test@gmail.com" &&
+      formState.password === "123123"
+    ) {
+      dispatch(authActions.logedIn(formState.email && formState.password));
+    }
+  };  
 
   return (
     <main className={classes.auth}>
@@ -59,6 +54,3 @@ const submitHandler=(event)=>{
     </main>
   );
 };
-
-
-
